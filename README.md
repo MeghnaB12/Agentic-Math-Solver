@@ -14,20 +14,21 @@
 ## 🧪 Architecture Flow
 
 This system utilizes **LangGraph** to manage a cyclic state graph, ensuring robust error handling and intelligent decision-making.
-
 ```mermaid
 graph TD
-    A[User Input] --> B{Input Guardrail}
-    B -- PII/Off-topic --> C[Reject Request]
-    B -- Valid Math --> D{Router}
-    D -- Specific/Known --> E[Knowledge Base Retrieval]
-    D -- General/Unknown --> F[Web Search (Tavily)]
-    E --> G[Context Injection]
+    A["User Input"] --> B{"Input Guardrail"}
+    B -- "PII/Off-topic" --> C["Reject Request"]
+    B -- "Valid Math" --> D{"Router"}
+    D -- "Specific/Known" --> E["Knowledge Base Retrieval"]
+    D -- "General/Unknown" --> F["Web Search (Tavily)"]
+    E --> G["Context Injection"]
     F --> G
-    G --> H[Gemini Generation]
-    H --> I{Output Guardrail}
-    I -- Safe --> J[React Frontend (LaTeX Render)]
-    I -- Unsafe --> C
+    G --> H["Gemini Generation"]
+    H --> I{"Output Guardrail"}
+    I -- "Safe" --> J["React Frontend (LaTeX Render)"]
+    I -- "Unsafe" --> C
+
+```
 
 Component,Function
 Input Guardrail,Regex & keyword analysis to block PII and ensure topic relevance.
