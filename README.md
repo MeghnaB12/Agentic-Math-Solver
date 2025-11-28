@@ -29,7 +29,6 @@ graph TD
     I -- Safe --> J[React Frontend (LaTeX Render)]
     I -- Unsafe --> C
 
-```
 
 Component,Function
 Input Guardrail,Regex & keyword analysis to block PII and ensure topic relevance.
