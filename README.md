@@ -15,7 +15,7 @@
 
 This system utilizes **LangGraph** to manage a cyclic state graph, ensuring robust error handling and intelligent decision-making.
 
-```mermaid
+
 graph TD
     A[User Input] --> B{Input Guardrail}
     B -- PII/Off-topic --> C[Reject Request]
