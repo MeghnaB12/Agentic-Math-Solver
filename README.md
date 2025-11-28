@@ -30,12 +30,13 @@ graph TD
 
 ```
 
-Component,Function
-Input Guardrail,Regex & keyword analysis to block PII and ensure topic relevance.
-Router,Logic layer that determines if the query requires RAG (Qdrant) or Web (Tavily).
-Retrieval,Fetches relevant context to ground the LLM's response.
-Generation,Google Gemini 1.5 Flash synthesizes the context into a step-by-step solution.
-Frontend,React + KaTeX for beautiful mathematical notation rendering.
+| Component | Function |
+| :--- | :--- |
+| **Input Guardrail** | Regex & keyword analysis to block PII and ensure topic relevance. |
+| **Router** | Logic layer that determines if the query requires RAG (Qdrant) or Web (Tavily). |
+| **Retrieval** | Fetches relevant context to ground the LLM's response. |
+| **Generation** | **Google Gemini 1.5 Flash** synthesizes the context into a step-by-step solution. |
+| **Frontend** | React + KaTeX for beautiful mathematical notation rendering. |
 
 🚀 Getting Started
 
