@@ -15,7 +15,7 @@
 
 This system utilizes **LangGraph** to manage a cyclic state graph, ensuring robust error handling and intelligent decision-making.
 
-
+```mermaid
 graph TD
     A[User Input] --> B{Input Guardrail}
     B -- PII/Off-topic --> C[Reject Request]
@@ -28,7 +28,6 @@ graph TD
     H --> I{Output Guardrail}
     I -- Safe --> J[React Frontend (LaTeX Render)]
     I -- Unsafe --> C
-
 
 Component,Function
 Input Guardrail,Regex & keyword analysis to block PII and ensure topic relevance.
