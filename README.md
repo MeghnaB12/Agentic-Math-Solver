@@ -94,12 +94,3 @@ Output Guardrail: Ensures the answer is safe and relevant.
 
 Frontend: Renders the solution with LaTeX formatting.
 
-🤝 Feedback
-Feedback is stored in data/feedback_dataset.jsonl to help improve the model in future iterations.
-
-
-### 💡 Pro Tip for the Image
-To make your README look amazing:
-1.  Take a screenshot of your running app (like the one you showed me).
-2.  Drag and drop that image file directly into the GitHub README editor.
-3.  GitHub will automatically upload it and create a link for you!
