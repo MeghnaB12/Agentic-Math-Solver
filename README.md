@@ -8,9 +8,6 @@
 
 > **An intelligent, Agentic RAG system designed to solve complex mathematical problems by intelligently routing between internal knowledge bases and external web tools.**
 
-![App Screenshot](https://via.placeholder.com/800x400.png?text=Paste+Your+App+Screenshot+Here)
-*(Replace this link with your actual screenshot!)*
-
 ## 🧪 Architecture Flow
 
 This system utilizes **LangGraph** to manage a cyclic state graph, ensuring robust error handling and intelligent decision-making.
