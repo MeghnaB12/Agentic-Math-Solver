@@ -6,11 +6,12 @@
 ![LangGraph](https://img.shields.io/badge/LangGraph-Agentic-orange)
 ![Qdrant](https://img.shields.io/badge/Qdrant-VectorDB-red)
 
-> **An intelligent, Agentic RAG system designed to solve complex mathematical problems by intelligently routing between internal knowledge bases and external web tools.**
+> **An agentic RAG system for mathematical problem solving that routes between an internal knowledge base and external web search.**
 
 ## 🧪 Architecture Flow
 
-This system utilizes **LangGraph** to manage a cyclic state graph, ensuring robust error handling and intelligent decision-making.
+The system uses **LangGraph** to manage a state graph for routing, retrieval, generation, and guardrail checks.
+
 ```mermaid
 graph TD
     A["User Input"] --> B{"Input Guardrail"}
@@ -24,98 +25,88 @@ graph TD
     H --> I{"Output Guardrail"}
     I -- "Safe" --> J["React Frontend (LaTeX Render)"]
     I -- "Unsafe" --> C
-
 ```
 
 | Component | Function |
 | :--- | :--- |
-| **Input Guardrail** | Regex & keyword analysis to block PII and ensure topic relevance. |
-| **Router** | Logic layer that determines if the query requires RAG (Qdrant) or Web (Tavily). |
-| **Retrieval** | Fetches relevant context to ground the LLM's response. |
-| **Generation** | **Google Gemini 1.5 Flash** synthesizes the context into a step-by-step solution. |
-| **Frontend** | React + KaTeX for beautiful mathematical notation rendering. |
+| **Input Guardrail** | Regex & keyword checks for PII and topic relevance. |
+| **Router** | Chooses between Qdrant retrieval and Tavily web search. |
+| **Retrieval** | Fetches relevant context to ground the LLM response. |
+| **Generation** | **Google Gemini 2.5 Flash** synthesizes context into a step-by-step solution. |
+| **Frontend** | React + KaTeX for mathematical notation rendering. |
 
 ## 🚀 Getting Started
 
-Prerequisites
+### Prerequisites
 
-* Docker Desktop (Must be running for Qdrant)
+* Docker Desktop (for Qdrant)
 * Python 3.11+
 * Node.js 18+
 
-1. Database Setup
+### 1. Database Setup
 
-Start the local Vector Database.
-
-```
+```bash
 docker-compose up -d qdrant
 ```
 
-2. Backend Setup
+### 2. Backend Setup
 
-Initialize the Python environment and server.
-
-```
+```bash
 cd backend
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Create .env file with: GOOGLE_API_KEY, TAVILY_API_KEY
+# Create .env with GOOGLE_API_KEY and TAVILY_API_KEY
 touch .env
 ```
 
-Load the Knowledge Base (Run once): This script embeds the dataset and populates the Qdrant collection.
+Load the knowledge base:
 
-```
+```bash
 python ../notebooks/load_kb.py
 ```
 
-Start the API Server:
+Start the API:
 
-```
+```bash
 uvicorn main:app --reload
 ```
 
-Server runs at: http://127.0.0.1:8000
+Server: `http://127.0.0.1:8000`
 
-3. Frontend Setup
+### 3. Frontend Setup
 
-Launch the React user interface.
-
-```
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-App runs at: http://localhost:5173
+App: `http://localhost:5173`
 
 ## 🤝 Human-in-the-Loop Feedback
-To improve the agent's performance, user feedback is collected via the UI.
 
-* Positive/Negative feedback is captured.
-* Data is stored in: data/feedback_dataset.jsonl.
-* This dataset can be used for future DSPy optimization or fine-tuning.
+User feedback is captured by the UI and stored in `data/feedback_dataset.jsonl` for later evaluation, prompt optimization, or fine-tuning experiments.
 
 ## 📂 Repository Structure
 
-```
-
-├── backend/             # FastAPI, LangGraph logic, and Agent definitions
+```text
+├── backend/             # FastAPI + LangGraph application
 ├── frontend/            # React + Vite application
-├── data/                # Qdrant storage and Feedback logs
-├── notebooks/           # Data loading and experimental scripts
-└── docker-compose.yml   # Infrastructure configuration
-
+├── data/                # Qdrant storage and feedback logs
+├── notebooks/           # Knowledge-base loading / experiments
+├── docker-compose.yml   # Qdrant infrastructure
+└── test_graph.py        # Graph behavior checks
 ```
 
 ## 🚀 System Capabilities
 
-- [x] **Agentic RAG Architecture** (LangGraph routing)
-- [x] **Knowledge Base** (Qdrant with JEE Bench dataset)
-- [x] **Web Search** (Tavily integration)
-- [x] **Guardrails** (Input/Output filtering for PII and topic)
-- [x] **Human-in-the-Loop** (Feedback collection via React UI)
-- [x] **Application** (FastAPI Backend + React Frontend)
+- [x] **Agentic RAG routing** with LangGraph
+- [x] **Qdrant knowledge base**
+- [x] **Tavily web search**
+- [x] **Input/output guardrails**
+- [x] **Human feedback capture**
+- [x] **FastAPI backend + React frontend**
 
+The system is designed as an engineering portfolio project; mathematical answers should still be independently verified for high-stakes use.
